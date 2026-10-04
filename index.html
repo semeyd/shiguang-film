@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#141713" />
+  <title>拾光胶片 · 本地照片相册</title>
+</head>
+<body>
+<div class="app-shell">
+  <div class="landscape" aria-hidden="true"><img id="background-a" class="landscape-image is-visible" src="./film/coast.png" alt="" /><img id="background-b" class="landscape-image" alt="" /></div>
+  <div class="scene-shade" aria-hidden="true"></div><div class="film-grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="拾光胶片首页"><svg class="brand-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="m16 3 7 13-7 13L9 16l7-13M3 16h26M9.5 4.8l13 22.4M22.5 4.8l-13 22.4"/></svg><span>拾光<span class="brand-english">FILM & MEMORY</span></span></a>
+    <nav class="topnav" aria-label="主导航"><button id="nav-photos" class="is-active" type="button">照片</button><button id="toggle-editor" type="button"><span>相册管理</span></button><button id="fullscreen" type="button">全屏</button></nav>
+    <div class="top-actions"><span class="local-badge"><i></i> 本地相册</span><button id="hero-import" class="import-button" type="button"><span aria-hidden="true">＋</span> 添加照片</button></div>
+  </header>
+  <main class="camera-scene" id="camera-scene">
+    <section class="hero-copy">
+      <p class="eyebrow">EVERY FRAME, A MEMORY</p>
+      <h1>光影有迹，<br /><em>记忆有温度。</em></h1>
+      <p class="hero-description">新建一本相册，<br />添加你自己的照片。</p>
+      <button id="view-photo" class="outline-button" type="button">查看这一帧 <span aria-hidden="true">↗</span></button>
+      <p class="album-line"><span class="fine-line"></span><span id="album-title">我的相册</span></p>
+    </section>
+    <figure class="camera-figure">
+      <div class="camera-halo" aria-hidden="true"></div>
+      <button class="camera-rig" id="camera-stage" type="button" aria-label="卷片并切换下一张照片" aria-expanded="false" aria-controls="photo-panel">
+        <img class="camera-body" src="./film/camera-body.png" alt="银黑色复古胶片相机" draggable="false" />
+        <span class="viewfinder"><img id="viewfinder-photo" alt="添加照片后显示" draggable="false" /><span class="viewfinder-glass" aria-hidden="true"></span><span class="focus-corner tl" aria-hidden="true"></span><span class="focus-corner br" aria-hidden="true"></span></span>
+        <span class="crank-motion" id="camera-crank" aria-hidden="true"></span><span class="shutter-flash" aria-hidden="true"></span>
+      </button>
+      <figcaption><span class="tiny-dot"></span> 点击相机 · 卷片切换下一帧</figcaption>
+    </figure>
+    <section class="frame-story">
+      <svg class="story-mark" viewBox="0 0 30 30" fill="none" aria-hidden="true"><circle cx="15" cy="15" r="14"/><path d="M15 7v16M10 18l5 5 5-5M11 11l4-4 4 4"/></svg>
+      <p class="eyebrow">THROUGH THE VIEWFINDER</p>
+      <h2 id="frame-title">你的第一帧</h2>
+      <p id="frame-caption" class="frame-caption">添加喜欢的照片，<br />从这里开始收藏时光。</p>
+      <div class="frame-meta"><span id="photo-counter" aria-live="polite">00 / 00</span><span id="photo-format">COLOR NEGATIVE</span></div>
+      <div class="photo-controls"><button id="previous-photo" class="circle-button" type="button" aria-label="上一张照片">←</button><button id="next-photo" class="circle-button" type="button" aria-label="下一张照片">→</button><button id="slideshow" class="slideshow-button" type="button" aria-label="开始自动播放"><span id="slideshow-icon" aria-hidden="true">▷</span><span id="slideshow-label">自动播放</span></button></div>
+    </section>
+    <div class="focus-actions" aria-label="相机浏览操作" hidden>
+      <button id="back-to-camera" type="button">← 返回相机</button>
+      <button id="sound-toggle" type="button" aria-label="关闭相机声音" aria-pressed="true">声音 开</button>
+    </div>
+    <section id="photo-panel" class="photo-panel" aria-label="当前照片" hidden>
+      <header class="photo-panel-heading"><div><p class="eyebrow">THE FRAME, IN FULL</p><h2 id="focus-title">这一帧</h2></div><button id="expand-photo" type="button" aria-label="打开照片大图">大图 ↗</button></header>
+      <button class="focus-photo-frame" id="focus-photo-frame" type="button" aria-label="打开当前照片大图"><img id="focus-photo" alt="" draggable="false" /></button>
+      <div class="photo-panel-bottom"><p id="focus-caption"></p><span id="focus-counter" aria-live="polite"></span></div>
+    </section>
+    <audio id="wind-audio" src="./film/wind.wav" preload="auto"></audio>
+  </main>
+  <footer class="film-deck">
+    <div class="film-settings"><label class="eyebrow" for="film-look">FILM SIMULATION</label><div class="film-select-wrap"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 8h4M4 16h4M16 8h4M16 16h4"/></svg><select id="film-look" aria-label="胶片色调"><option value="original">原色 · Original</option><option value="warm">暖调 · Warm</option><option value="bw">黑白 · Mono</option></select></div><p id="deck-note">每一帧，都值得慢慢看</p></div>
+    <button id="strip-previous" class="strip-arrow" type="button" aria-label="向左浏览胶片">‹</button>
+    <div class="filmstrip-viewport" id="filmstrip-viewport"><div class="filmstrip" id="filmstrip" role="group" aria-label="照片胶片"></div></div>
+    <button id="strip-next" class="strip-arrow" type="button" aria-label="向右浏览胶片">›</button>
+    <div class="deck-stamp" aria-hidden="true"><span>SHIGUANG</span><strong>每一帧<br />都珍贵</strong><span>EST. 2026</span></div>
+  </footer>
+  <aside id="workspace-panel" class="workspace-panel" aria-label="相册管理" hidden>
+    <div class="panel-heading"><div><p class="eyebrow">YOUR COLLECTION</p><h2>我的相册</h2></div><button id="close-panel" class="icon-button" type="button" aria-label="关闭相册管理">×</button></div>
+    <p class="muted">把照片收进相册，让时光慢慢展开。</p>
+    <div class="primary-actions"><button id="new-book" type="button">新建相册</button><button id="open-book" type="button">打开相册</button></div>
+    <section id="recent-section" hidden><h3>最近打开</h3><div id="recent-list"></div></section>
+    <section id="editor-section" hidden>
+      <div class="divider"></div><label class="field-label" for="book-title">相册名称</label><input id="book-title" type="text" maxlength="80" /><p id="book-location" class="path-hint"></p>
+      <div class="editor-actions"><button id="import-photos" type="button">添加照片</button><button id="save-book" type="button">保存相册</button></div>
+      <label class="field-label" for="cover-select">相册代表照片</label><select id="cover-select"></select>
+      <h3>照片顺序与说明</h3><div id="page-list" class="page-list"></div>
+    </section>
+    <p id="workspace-status" class="workspace-status" role="status" aria-live="polite"></p>
+  </aside>
+  <dialog id="new-dialog" class="new-dialog"><form method="dialog"><p class="eyebrow">A NEW MEMORY</p><h2>新建相册</h2><label for="new-title">相册名称</label><input id="new-title" required maxlength="80" placeholder="例如：秋日旅行" /><p id="chosen-directory" class="path-hint">尚未选择保存位置</p><button id="choose-directory" type="button">选择保存位置</button><div class="dialog-actions"><button value="cancel" type="submit">取消</button><button id="create-book" type="button">创建相册</button></div></form></dialog>
+  <dialog id="photo-dialog" class="photo-dialog" aria-label="照片大图"><div class="viewer-top"><span id="viewer-title"></span><button id="close-photo" class="icon-button" type="button" aria-label="关闭照片大图">×</button></div><button id="viewer-previous" class="viewer-arrow" type="button" aria-label="大图上一张">‹</button><div class="large-photo-wrap"><img id="large-photo" alt="" /></div><button id="viewer-next" class="viewer-arrow" type="button" aria-label="大图下一张">›</button><div class="viewer-bottom"><span id="viewer-caption"></span><span id="viewer-counter"></span><button id="edit-selected" type="button">编辑照片说明 ↗</button></div></dialog>
+  <div id="photo-toast" class="photo-toast" role="status" aria-live="polite"></div>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
